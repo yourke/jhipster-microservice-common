@@ -30,7 +30,12 @@ public class RequestOriginFilter extends OncePerRequestFilter {
         // 对于模块间接口，需要校验来源
         String instanceId = request.getHeader(OAuth2FeignClientInterceptor.INSTANCE_ID_HEADER);
         log.debug("Origin InstanceId: " + instanceId);
-        // 如果instanceId为空，说明非内部模块访问 TODO 或增加其他方式校验，如是否为注册表内的实例id，是否为局域网内ip
+        /*
+         * TODO 或增加其他方式校验：
+         * 1.如是否为注册表内的实例id，是否为局域网内ip
+         * 2.在gateway中标记所有路过请求，若存在该标记说明不是内部模块调用
+         */
+        // 如果instanceId为空，说明非内部模块访问
         if (StringUtils.isBlank(instanceId)) {
             log.warn("非法来源请求，URI：{}，InstanceId：{}", request.getRequestURI(), instanceId);
             response.sendError(HttpServletResponse.SC_FORBIDDEN, "Illegal request origin");

@@ -21,7 +21,7 @@ public class RequestOriginConfiguration {
         FilterRegistrationBean registration = new FilterRegistrationBean();
         // 添加指定的过滤器
         registration.setFilter(new RequestOriginFilter());
-        // 设置过滤器的URL模式
+        // 设置过滤器的URL模式（针对模块间内部接口的校验）
         registration.addUrlPatterns("/api/inner/*");
         // 设置过滤器名称
         registration.setName("requestOriginFilter");
