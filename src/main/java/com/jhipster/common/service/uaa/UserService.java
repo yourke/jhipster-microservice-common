@@ -21,8 +21,7 @@ import com.jhipster.common.domain.uaa.querymap.UserListParam;
 public interface UserService {
 
     /**
-     * 获取当前系统用户<br/>
-     * （包含是否是租户管理员、租户类别等信息）
+     * 获取当前用户
      *
      * @return SysUserDTO
      */
