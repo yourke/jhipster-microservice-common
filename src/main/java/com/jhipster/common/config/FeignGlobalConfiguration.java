@@ -43,4 +43,5 @@ public class FeignGlobalConfiguration {
         return new QueryMapRequestInterceptor();
     }
 
+    // TODO Hystrix配置
 }
