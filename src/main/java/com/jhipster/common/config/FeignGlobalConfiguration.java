@@ -1,15 +1,24 @@
 package com.jhipster.common.config;
 
 import org.slf4j.LoggerFactory;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.cloud.netflix.feign.EnableFeignClients;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Scope;
 
 import com.jhipster.common.client.OAuth2FeignClientConfiguration;
 import com.jhipster.common.client.QueryMapRequestInterceptor;
+import com.netflix.hystrix.HystrixCommand;
+import com.netflix.hystrix.HystrixCommandGroupKey;
+import com.netflix.hystrix.HystrixCommandKey;
+import com.netflix.hystrix.HystrixThreadPoolProperties;
 
+import feign.Feign;
 import feign.Logger;
 import feign.RequestInterceptor;
+import feign.hystrix.HystrixFeign;
 
 /**
  * Feign的全局配置，在被主程序@ComponentScan扫描后，被所有FeignClient共享
@@ -43,5 +52,34 @@ public class FeignGlobalConfiguration {
         return new QueryMapRequestInterceptor();
     }
 
-    // TODO Hystrix配置
+    @Configuration
+    @ConditionalOnClass({HystrixCommand.class, HystrixFeign.class})
+    protected static class HystrixFeignConfiguration {
+
+        /*
+         * 问题：在此方法上想加个@ConditionalOnMissingBean注解，本地验证正常。
+         * 但在开发环境部署时，以portal模块为例，加了该注解就进不了此方法，有feign在此之前被加载了？先去掉该注解，后续有必要再修改
+         */
+        @Bean
+        @Scope("prototype")
+        // @ConditionalOnMissingBean
+        @ConditionalOnProperty(name = "feign.hystrix.enabled", havingValue = "true", matchIfMissing = false)
+        public Feign.Builder feignHystrixBuilder() {
+            logger.info("hystrix feign client has configured!");
+            return HystrixFeign.builder().setterFactory((target, method) -> {
+                String groupKey = target.name();
+                String commandKey = Feign.configKey(target.type(), method);
+                return HystrixCommand.Setter.withGroupKey(HystrixCommandGroupKey.Factory.asKey(groupKey))
+                        .andCommandKey(HystrixCommandKey.Factory.asKey(commandKey))
+                        // 设置线程池默认值
+                        .andThreadPoolPropertiesDefaults(HystrixThreadPoolProperties.Setter()
+                                // 允许线程池大小自动动态调整（默认false）
+                                .withAllowMaximumSizeToDivergeFromCoreSize(true)
+                                // 最大线程数（默认10）
+                                .withMaximumSize(50)
+                                // 非核心线程的空闲时间min（默认1）
+                                .withKeepAliveTimeMinutes(10));
+            });
+        }
+    }
 }
