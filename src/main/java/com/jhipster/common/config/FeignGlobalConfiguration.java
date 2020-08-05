@@ -4,6 +4,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.cloud.netflix.feign.EnableFeignClients;
+import org.springframework.cloud.netflix.feign.FeignClientsConfiguration;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Scope;
@@ -52,6 +53,11 @@ public class FeignGlobalConfiguration {
         return new QueryMapRequestInterceptor();
     }
 
+    /**
+     * 集成了Hystrix的Fegin客户端，增加全局默认hystrix配置，避免高并发下调用失败，无需修改各模块hystrix配置<br/>
+     * 参考于{@link FeignClientsConfiguration}中HystrixFeignConfiguration<br/>
+     * 另外，可用hystrix的@DefaultProperties实现类级别的默认配置
+     */
     @Configuration
     @ConditionalOnClass({HystrixCommand.class, HystrixFeign.class})
     protected static class HystrixFeignConfiguration {
