@@ -43,9 +43,9 @@ UAA认证方式主要有两种：用户调用、机器调用
 
 2. 由于外部请求统一入口为Gateway，可以在Gateway处统一标记，未标记的默认为内部请求，然后由消费方的common校验是否来源于外部。  
 此方式相对于上一种更加简单可靠，在无特殊需求的情况下基本是首选方案。   
-![Gateway请求标记](./src/test/resources/pic/originMarkGateway.png)
+![Gateway请求标记](./src/test/resources/pic/originMarkGateway.png)  
 
-
+以上两种方式仅作参考，其它方式如校验请求来源ip是否为局域网等，也可以尝试，视具体需求而定。
 
 ## 注意事项
 此项目主要是提供个思路供参考，若实际使用还需在其中加入对应的业务feign接口。
