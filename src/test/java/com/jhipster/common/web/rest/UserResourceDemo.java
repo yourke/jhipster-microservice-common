@@ -34,4 +34,5 @@ public class UserResourceDemo {
         return ResponseEntity.ok(currentUser);
     }
 
+    // TODO 文件上传示例
 }
