@@ -17,7 +17,19 @@
 
 ## 实现原理
 ### 认证凭据传递
-TODO 两种调用逻辑下的token获取方式
+UAA认证方式主要有两种：用户调用、机器调用
+1. 用户调用  
+用户自身登录，调用权限接口。
+![用户调用](./src/test/resources/pic/oauth2Password.png)
+
+1. 机器调用
+模块自身登录，调用公共接口。一般用于定时作业，无用户的情况。
+![机器调用](./src/test/resources/pic/oauth2Client.png)
+
+简单来说就是用用户的身份或模块的身份去登录，在跨模块调用时需要传递对应的认证信息token到目标模块中。  
+在此common中对应以下代码：
+![token传递](./src/test/resources/pic/relayToken.png)
+
 
 ### 内部调用校验
 TODO 如何区分内部还是外部接口调用
