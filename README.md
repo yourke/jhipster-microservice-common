@@ -38,7 +38,8 @@ UAA认证方式主要有两种：用户调用、机器调用
 1. 是请求消费方标记自身实例来源，服务方校验其实例来源是否有效。  
 消费方和服务方都引入common模块，common对其进行标记及校验。
 ![标记来源](./src/test/resources/pic/originMark.png)
-![校验来源](./src/test/resources/pic/originFilter.png)
+![校验来源配置](./src/test/resources/pic/originFilterConfig.png)
+![校验来源执行](./src/test/resources/pic/originFilterDo.png)
 
 2. 由于外部请求统一入口为Gateway，可以在Gateway处统一标记，未标记的默认为内部请求，然后由消费方的common校验是否来源于外部。  
 此方式相对于上一种更加简单可靠，在无特殊需求的情况下基本是首选方案。   
