@@ -14,14 +14,13 @@ import org.springframework.security.oauth2.provider.authentication.OAuth2Authent
 import com.jhipster.common.constant.TokenConst;
 
 /**
- * 当前用户工具类
+ * 当前用户工具类<br/>
+ * 通过解析token，获取其中的用户基本信息
  * 
  * @author yuanke
  * @date 2019/10/10 20:24
  */
 public final class SecurityUtil {
-
-    private static final String ROLE_TENANT_ADMIN = "ROLE_TENANT_ADMIN";
 
     private static JsonParser jsonParser = JsonParserFactory.getJsonParser();
 
