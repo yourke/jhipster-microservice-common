@@ -17,7 +17,7 @@ import com.jhipster.common.constant.TokenConst;
  * 当前用户工具类<br/>
  * 通过解析token，获取其中的用户基本信息
  * 
- * @author yuanke
+ * @author yuenke
  * @date 2019/10/10 20:24
  */
 public final class SecurityUtil {

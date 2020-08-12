@@ -19,7 +19,7 @@ import com.jhipster.common.client.OAuth2FeignClientInterceptor;
 /**
  * 校验请求来源过滤器
  *
- * @author yuanke
+ * @author yuenke
  * @date 2019/5/27 17:51
  */
 public class RequestOriginFilter extends OncePerRequestFilter {

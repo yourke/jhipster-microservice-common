@@ -9,7 +9,7 @@ import io.swagger.annotations.ApiModelProperty;
  * 用户DTO
  *
  * @description 用于页面交互，包含基本用户信息
- * @author yuanke
+ * @author yuenke
  * @date 2019/6/21 9:34
  */
 @ApiModel(value = "用户DTO", description = "用于页面交互，包含基本用户信息")

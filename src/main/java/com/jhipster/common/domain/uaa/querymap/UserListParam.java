@@ -3,7 +3,7 @@ package com.jhipster.common.domain.uaa.querymap;
 /**
  * 用户对象接口 动态查询参数<br/>
  * 
- * @author yuanke
+ * @author yuenke
  * @date 2019/10/12 10:30
  */
 public class UserListParam {

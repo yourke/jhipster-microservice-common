@@ -23,7 +23,7 @@ import feign.form.spring.SpringFormEncoder;
 /**
  * 模块接口示例
  * 
- * @author yuanke
+ * @author yuenke
  * @date 2020/1/12 21:20
  */
 @AuthorizedFeignClient(name = "base", configuration = {OAuth2FeignClientConfiguration.class,

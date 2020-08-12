@@ -19,7 +19,7 @@ import io.swagger.annotations.ApiParam;
  * 模块接口调用示例<br/>
  * 非测试类，仅用于说明在SpringCloud模块中引入common之后，如何调用其它模块接口
  * 
- * @author yuanke
+ * @author yuenke
  * @date 2020/7/8 10:54
  */
 @RestController

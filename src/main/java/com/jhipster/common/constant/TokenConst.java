@@ -3,7 +3,7 @@ package com.jhipster.common.constant;
 /**
  * 自定义token属性常量
  *
- * @author yuanke
+ * @author yuenke
  * @date 2019/10/10 19:04
  */
 public final class TokenConst {

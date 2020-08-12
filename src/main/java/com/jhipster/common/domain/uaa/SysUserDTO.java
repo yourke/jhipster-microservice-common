@@ -7,7 +7,7 @@ import io.swagger.annotations.ApiModelProperty;
  * 系统用户
  * 
  * @description 用于模块间获取的当前用户
- * @author yuanke
+ * @author yuenke
  * @date 2019/6/21 9:31
  */
 @ApiModel(value = "系统用户DTO", description = "用于模块间获取的当前用户")

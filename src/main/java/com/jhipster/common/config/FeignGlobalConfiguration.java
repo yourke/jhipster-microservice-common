@@ -24,7 +24,7 @@ import feign.hystrix.HystrixFeign;
 /**
  * Feign的全局配置，在被主程序@ComponentScan扫描后，被所有FeignClient共享
  * 
- * @author yuanke
+ * @author yuenke
  * @date 2019/7/15 21:04
  */
 @Configuration

@@ -14,7 +14,7 @@ import feign.RequestTemplate;
 /**
  * 认证信息Interceptor
  *
- * @author yuanke
+ * @author yuenke
  * @date 2019/7/15 16:08
  */
 public class OAuth2FeignClientInterceptor extends OAuth2FeignRequestInterceptor {
