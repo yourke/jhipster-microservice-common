@@ -1,5 +1,5 @@
 # jhipster-microservice-common
-用于Jhipster创建的微服务应用的公用common组件。  
+用于Jhipster创建的微服务应用的公用common组件。 
 
 ## 用途
 用于Jhipster创建的微服务应用的公用common组件，简化模块间接口调用流程。  
