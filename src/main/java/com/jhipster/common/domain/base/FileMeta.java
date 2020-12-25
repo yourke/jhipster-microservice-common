@@ -5,7 +5,7 @@ import io.swagger.annotations.ApiModel;
 /**
  * 文件元信息 DTO
  * 
- * @author yuenke
+ * @author yonker
  * @date 2020/1/12 21:32
  */
 @ApiModel

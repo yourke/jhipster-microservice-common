@@ -11,7 +11,7 @@ import io.github.jhipster.security.uaa.LoadBalancedResourceDetails;
 /**
  * 用户认证Interceptor配置
  * 
- * @author yuenke
+ * @author yonker
  * @date 2019/7/15 20:41
  */
 public class OAuth2FeignClientConfiguration {

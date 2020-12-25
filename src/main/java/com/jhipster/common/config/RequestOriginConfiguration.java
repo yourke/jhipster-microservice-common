@@ -11,7 +11,7 @@ import com.jhipster.common.filter.RequestOriginFilter;
 /**
  * 请求来源Filter配置
  * 
- * @author yuenke
+ * @author yonker
  * @date 2019/7/17 15:10
  */
 @Configuration

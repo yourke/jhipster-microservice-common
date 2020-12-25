@@ -13,7 +13,7 @@ import feign.QueryMap;
  * 此注解没什么实际作用，只是用于标记，便于后期替换<br/>
  * 在spring-cloud-openfeign升级到2.1.0.RC1版本后由官方的@SpringQueryMap替换<br/>
  *
- * @author yuenke
+ * @author yonker
  * @date 2019/9/11 13:38
  * @see feign.QueryMap
  */

@@ -25,7 +25,7 @@ import feign.RequestTemplate;
  * *注意使用{@link SpringQueryMap}标记，便于后续查找替换<br/>
  * spring-cloud-openfeign升级到2.1.0. RC1版本后可用官方的@SpringQueryMap替换
  * 
- * @author yuenke
+ * @author yonker
  * @date 2019/9/13 1:13
  */
 @Component
