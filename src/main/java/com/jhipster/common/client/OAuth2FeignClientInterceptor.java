@@ -6,7 +6,10 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.oauth2.client.OAuth2ClientContext;
 import org.springframework.security.oauth2.client.resource.OAuth2ProtectedResourceDetails;
 import org.springframework.security.oauth2.provider.authentication.OAuth2AuthenticationDetails;
+import org.springframework.web.context.request.RequestContextHolder;
+import org.springframework.web.context.request.ServletRequestAttributes;
 
+import com.jhipster.common.constant.HeaderConstant;
 import com.netflix.appinfo.ApplicationInfoManager;
 
 import feign.RequestTemplate;
@@ -18,9 +21,6 @@ import feign.RequestTemplate;
  * @date 2019/7/15 16:08
  */
 public class OAuth2FeignClientInterceptor extends OAuth2FeignRequestInterceptor {
-
-    /** 自定义header属性InstanceId */
-    public static final String INSTANCE_ID_HEADER = "X-Instance-Id";
 
     private final ApplicationInfoManager applicationInfoManager;
 
@@ -49,6 +49,29 @@ public class OAuth2FeignClientInterceptor extends OAuth2FeignRequestInterceptor 
         /*
          * 2.标记消费者的来源
          */
-        template.header(INSTANCE_ID_HEADER, applicationInfoManager.getInfo().getId());
+        template.header(HeaderConstant.X_INSTANCE_ID, applicationInfoManager.getInfo().getId());
+
+        /*
+         * 3.其它需中继的Header值
+         */
+        relayHeaders(template);
+    }
+
+    /**
+     * 中继Header值
+     *
+     * @param template
+     *            请求模板
+     */
+    private void relayHeaders(RequestTemplate template) {
+        ServletRequestAttributes requestAttributes = (ServletRequestAttributes) RequestContextHolder
+                .getRequestAttributes();
+        if (requestAttributes != null) {
+            // 添加指定Header值
+            String originDomain = requestAttributes.getRequest().getHeader(HeaderConstant.X_ORIGIN_DOMAIN);
+            if (originDomain != null) {
+                template.header(HeaderConstant.X_ORIGIN_DOMAIN, originDomain);
+            }
+        }
     }
 }
