@@ -5,13 +5,14 @@
 用于Jhipster创建的微服务应用的公用common组件，简化模块间接口调用流程。  
 1. 将feign接口提取为公用，解决各模块间接口的使用及维护问题。
 2. 将@AuthorizedFeignClient和@AuthorizedUserFeignClient注解合并为@AuthorizedFeignClient，不再区分不同认证方式下的接口调用问题。  
+3. 作为常规common组件，包含公共的配置、常量、工具类等。
 
 ## 使用说明
 1. 项目结构  
 ![项目结构](./src/test/resources/pic/projectStructure.png)
 
 2. 使用方式  
-在引入common包之后，当前模块能扫描到该common后即可使用。
+在引入common包之后，当前模块能扫描到该common后即可使用，如使用@ComponentScan(basePackages = {"com.jhipster.common"})。     
 参考测试类中的示例demo，和一般原生Fegin注解使用方式无异。
 ![使用方法](./src/test/resources/pic/useMethod.png)
 
