@@ -8,13 +8,12 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.core.env.Environment;
 import org.springframework.web.filter.OncePerRequestFilter;
 
-import com.jhipster.common.client.OAuth2FeignClientInterceptor;
+import com.jhipster.common.constant.HeaderConstant;
 
 /**
  * 校验请求来源过滤器
@@ -36,16 +35,23 @@ public class RequestOriginFilter extends OncePerRequestFilter {
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain)
             throws ServletException, IOException {
         /*
-         * TODO 或增加其他方式校验：
-         * 1.如是否为注册表内的实例id，是否为局域网内ip
-         * 2.在gateway中标记所有路过请求，若存在该标记说明不是内部模块调用
+         * 此处校验方式多种多样，根据需求自定义，如要限制模块间接口只能内部调用，参考方案：
+         * 1.在gateway中标记所有路过请求，若存在该标记说明不是内部模块调用
+         * 2.判断instanceId是否为空，为空则说明未通过此common组件进行内部调用
+         * 3.是否为注册表内的实例id，是否为局域网内ip
+         * ...
          */
-        // 对于模块间接口，需要校验来源
-        String instanceId = request.getHeader(OAuth2FeignClientInterceptor.INSTANCE_ID_HEADER);
+
+        // 1.区分请求来源，是否经由gateway
+        // 经由gateway转发的请求，需增加"X-Gateway-Proxy"标记，以供此处判断
+        boolean isGatewayProxy = "true".equals(request.getHeader(HeaderConstant.X_GATEWAY_PROXY));
+        // 当前请求是否有效（目前只要是来源于内部，便认为有效）
+        boolean isValidRequest = !isGatewayProxy;
+        // 对于模块间接口，都会标记请求来源
+        String instanceId = request.getHeader(HeaderConstant.X_INSTANCE_ID);
         log.debug("Origin InstanceId: " + instanceId);
 
-        // 当前请求是否有效（如果instanceId为空，说明非内部模块访问）
-        boolean isValidRequest = StringUtils.isNotBlank(instanceId);
+        // 2.判断该请求是否有效
         // 当前模块是否处于开发模式，若是则直接放行
         isValidRequest = Arrays.asList(env.getActiveProfiles()).contains("dev") || isValidRequest;
         if (isValidRequest) {
