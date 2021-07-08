@@ -1,5 +1,7 @@
 # jhipster-microservice-common
-用于Jhipster创建的微服务应用的公用common组件。 
+[![使用IntelliJ IDEA开发维护](https://img.shields.io/badge/IntelliJ%20IDEA-提供支持-blue.svg)](https://www.jetbrains.com/?from=jhipster-microservice-common)
+
+用于Jhipster创建的微服务应用的公用common组件。
 
 ## 用途
 用于Jhipster创建的微服务应用的公用common组件，简化模块间接口调用流程。  
